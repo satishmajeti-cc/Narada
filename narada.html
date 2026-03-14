@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChaosCrafted — Building the Future of Work Management</title>
+<meta name="description" content="ChaosCrafted built Narada — an AI that runs your workplace. One conversation. Every tool. Any AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Sora:wght@200;300;400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03050d;--s:#060a17;--s2:#090f1e;--border:#121c35;--border2:#1a2745;--arc:#00e5ff;--arc2:#0099cc;--gold:#ffb800;--red:#ff4060;--green:#00ff88;--text:#e8f0ff;--dim:#6a80a8;--muted:#3a4a6a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;font-weight:300;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.007) 2px,rgba(0,229,255,0.007) 4px);pointer-events:none;z-index:9999;}
+.cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,0.04) 0%,transparent 70%);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left 0.08s,top 0.08s;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:20px 64px;background:linear-gradient(180deg,rgba(3,5,13,0.98) 0%,transparent 100%);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,229,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-mark{width:34px;height:34px;position:relative;display:flex;align-items:center;justify-content:center;}
+.logo-ring{position:absolute;inset:0;border:1.5px solid var(--arc);border-radius:50%;animation:spinRing 8s linear infinite;}
+.logo-ring::before{content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--arc);border-radius:50%;box-shadow:0 0 8px var(--arc);}
+@keyframes spinRing{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.logo-core{width:16px;height:16px;background:radial-gradient(circle,var(--arc) 0%,var(--arc2) 100%);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
+.logo-text{font-family:'Orbitron',monospace;font-size:14px;font-weight:600;letter-spacing:0.15em;color:var(--text);}
+.logo-text span{color:var(--arc);}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-links a{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--arc);}
+.nav-cta{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--bg);background:var(--arc);padding:10px 22px;text-decoration:none;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
+.nav-cta:hover{background:#fff;}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);background-size:50px 50px;animation:gridPulse 6s ease-in-out infinite;}
+@keyframes gridPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.hero-beam{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:2px;height:700px;background:linear-gradient(180deg,transparent,var(--arc),transparent);animation:beamPulse 4s ease-in-out infinite;}
+@keyframes beamPulse{0%,100%{opacity:.3;height:700px}50%{opacity:1;height:900px}}
+.hero-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(0,229,255,0.07) 0%,rgba(255,184,0,0.03) 45%,transparent 70%);pointer-events:none;}
+.hero-content{position:relative;z-index:1;max-width:1000px;}
+.hero-status{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(0,229,255,0.2);background:rgba(0,229,255,0.05);padding:8px 20px;margin-bottom:48px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:0.25em;color:var(--arc);text-transform:uppercase;}
+.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);animation:sPulse 2s ease-in-out infinite;}
+@keyframes sPulse{0%,100%{opacity:1;box-shadow:0 0 10px var(--green)}50%{opacity:.5;box-shadow:0 0 4px var(--green)}}
+.narada-label{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:0.5em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:16px;}
+.narada-name{font-family:'Orbitron',monospace;font-size:clamp(80px,16vw,180px);font-weight:900;letter-spacing:0.08em;line-height:.85;background:linear-gradient(135deg,#fff 0%,var(--arc) 40%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block;}
+.narada-name::before{content:'NARADA';position:absolute;inset:0;background:linear-gradient(135deg,#fff 0%,var(--arc) 40%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:blur(30px);opacity:.35;z-index:-1;}
+.narada-sub{font-family:'Orbitron',monospace;font-size:clamp(11px,1.4vw,15px);letter-spacing:.35em;color:var(--dim);text-transform:uppercase;display:block;margin-top:16px;margin-bottom:32px;}
+.hero-tagline{font-family:'Playfair Display',serif;font-size:clamp(18px,2.8vw,30px);font-style:italic;color:var(--text);line-height:1.5;margin-bottom:18px;opacity:.9;}
+.hero-tagline span{color:var(--arc);}
+.hero-tagline .go{color:var(--gold);}
+.hero-desc{font-size:15px;color:var(--dim);max-width:580px;margin:0 auto 48px;line-height:1.8;}
+.hero-actions{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.btn-arc{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bg);background:linear-gradient(135deg,var(--arc),var(--arc2));padding:16px 36px;text-decoration:none;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);transition:all .3s;}
+.btn-arc:hover{background:linear-gradient(135deg,#fff,var(--arc));transform:translateY(-3px);}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--arc);border:1px solid rgba(0,229,255,0.3);padding:16px 36px;text-decoration:none;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);background:rgba(0,229,255,0.04);transition:all .3s;}
+.btn-ghost:hover{background:rgba(0,229,255,0.1);transform:translateY(-3px);}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;z-index:1;animation:scrollB 3s ease-in-out infinite;}
+@keyframes scrollB{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:.8;transform:translateX(-50%) translateY(6px)}}
+.scroll-hint::after{content:'';width:1px;height:40px;background:linear-gradient(180deg,var(--muted),transparent);}
+/* SECTIONS */
+.sec{position:relative;padding:140px 64px;max-width:1320px;margin:0 auto;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.3em;color:var(--arc);text-transform:uppercase;margin-bottom:20px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--arc);}
+.sh2{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,52px);font-weight:700;line-height:1.1;letter-spacing:.04em;margin-bottom:20px;}
+.sh2 span{color:var(--arc);}
+.sh2 .go{color:var(--gold);}
+.slead{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--text);line-height:1.6;margin-bottom:22px;opacity:.9;}
+.sbody{font-size:14px;color:var(--dim);line-height:1.85;margin-bottom:16px;}
+.sbody strong{color:var(--text);font-weight:500;}
+/* REACTOR */
+.narada-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.reactor-wrap{display:flex;align-items:center;justify-content:center;height:400px;}
+.reactor{position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center;}
+.rr{position:absolute;border-radius:50%;border:1px solid;animation:rSpin linear infinite;}
+.rr1{inset:0;border-color:rgba(0,229,255,.6);animation-duration:20s;}
+.rr1::before,.rr1::after{content:'';position:absolute;width:8px;height:8px;background:var(--arc);border-radius:50%;box-shadow:0 0 12px var(--arc),0 0 24px var(--arc);}
+.rr1::before{top:-4px;left:50%;transform:translateX(-50%);}
+.rr1::after{bottom:-4px;left:50%;transform:translateX(-50%);}
+.rr2{inset:30px;border-color:rgba(255,184,0,.4);animation-duration:12s;animation-direction:reverse;}
+.rr2::before{content:'';position:absolute;width:6px;height:6px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold);right:-3px;top:50%;transform:translateY(-50%);}
+.rr3{inset:60px;border-color:rgba(0,229,255,.2);animation-duration:8s;}
+.rr4{inset:90px;border-color:rgba(255,184,0,.12);animation-duration:15s;animation-direction:reverse;}
+@keyframes rSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.rcore{position:absolute;width:80px;height:80px;background:radial-gradient(circle,#fff 0%,var(--arc) 30%,rgba(0,229,255,.3) 70%,transparent 100%);border-radius:50%;box-shadow:0 0 20px var(--arc),0 0 60px rgba(0,229,255,.4),0 0 120px rgba(0,229,255,.2);animation:corePulse 3s ease-in-out infinite;}
+@keyframes corePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);box-shadow:0 0 30px var(--arc),0 0 90px rgba(0,229,255,.6),0 0 180px rgba(0,229,255,.3);}}
+.oi{position:absolute;width:38px;height:38px;background:var(--s2);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 0 20px rgba(0,0,0,.5);}
+.oi1{top:-18px;left:50%;transform:translateX(-50%);}
+.oi2{top:50%;right:-18px;transform:translateY(-50%);}
+.oi3{bottom:-18px;left:50%;transform:translateX(-50%);}
+.oi4{top:50%;left:-18px;transform:translateY(-50%);}
+.oi5{top:8%;right:4%;}
+.oi6{bottom:8%;right:4%;}
+.oi7{bottom:8%;left:4%;}
+.oi8{top:8%;left:4%;}
+.cap-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;}
+.cap{display:inline-flex;align-items:center;gap:6px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border:1px solid var(--border2);color:var(--dim);background:var(--s);transition:all .25s;}
+.cap:hover{border-color:var(--arc);color:var(--arc);background:rgba(0,229,255,.05);}
+.cap .d{width:5px;height:5px;background:var(--arc);border-radius:50%;}
+/* DEMO */
+.demo-box{border:1px solid var(--border2);background:var(--s);overflow:hidden;position:relative;}
+.demo-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--arc),var(--gold),transparent);}
+.demo-top{padding:14px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;background:rgba(0,229,255,.02);}
+.ddots{display:flex;gap:7px;}
+.ddots span{width:11px;height:11px;border-radius:50%;}
+.dd1{background:#ff5f57}.dd2{background:#febc2e}.dd3{background:#28c840}
+.dtitle{flex:1;text-align:center;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);}
+.dstatus{font-family:'Orbitron',monospace;font-size:9px;color:var(--green);letter-spacing:.1em;}
+.demo-body{display:grid;grid-template-columns:250px 1fr;min-height:440px;}
+.dsbar{border-right:1px solid var(--border);padding:18px 0;}
+.dsbst{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;padding:0 16px 10px;}
+.dstool{display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid rgba(18,28,53,.5);transition:background .2s;}
+.dstool:hover{background:rgba(0,229,255,.03);}
+.dstool img{width:18px;height:18px;object-fit:contain;border-radius:3px;flex-shrink:0;}
+.dstn{font-size:11px;color:var(--dim);flex:1;}
+.dsts{width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 5px var(--green);}
+.dchat{padding:28px 30px;display:flex;flex-direction:column;gap:18px;}
+.cm{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(10px);animation:cmIn .5s ease forwards;}
+.cm.usr{flex-direction:row-reverse;}
+.cm:nth-child(1){animation-delay:.4s}.cm:nth-child(2){animation-delay:1s}.cm:nth-child(3){animation-delay:1.8s}.cm:nth-child(4){animation-delay:2.6s}
+@keyframes cmIn{to{opacity:1;transform:translateY(0)}}
+.cav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.cav-j{background:radial-gradient(circle,rgba(0,229,255,.2),rgba(0,229,255,.05));border:1px solid rgba(0,229,255,.3);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:var(--arc);}
+.cav-u{background:rgba(255,184,0,.1);border:1px solid rgba(255,184,0,.2);}
+.cb{max-width:480px;padding:12px 16px;font-size:13px;line-height:1.6;border:1px solid var(--border);background:var(--s2);color:var(--dim);}
+.cb.jb{border-color:rgba(0,229,255,.15);background:rgba(0,229,255,.03);color:var(--text);}
+.cb.ub{border-color:rgba(255,184,0,.15);background:rgba(255,184,0,.03);color:var(--text);}
+.cb .hi{color:var(--arc);font-weight:500;}
+.cb .go{color:var(--gold);}
+.ap{display:inline-flex;align-items:center;gap:5px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.06em;padding:4px 9px;margin-top:6px;margin-right:5px;border:1px solid;background:rgba(0,0,0,.3);}
+.ap.done{border-color:rgba(0,255,136,.3);color:var(--green);}
+.ap.info{border-color:rgba(0,229,255,.2);color:var(--arc);}
+.ap.pend{border-color:rgba(255,184,0,.3);color:var(--gold);}
+.cconf{margin-top:10px;border:1px solid rgba(255,184,0,.25);background:rgba(255,184,0,.04);padding:12px 14px;}
+.cconf-t{font-family:'Orbitron',monospace;font-size:9px;color:var(--gold);letter-spacing:.12em;margin-bottom:6px;}
+.cconf-d{font-size:11px;color:var(--dim);margin-bottom:10px;}
+.cconf-btns{display:flex;gap:8px;}
+.cconf-btn{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.08em;padding:6px 14px;border:none;cursor:pointer;}
+.cby{background:var(--arc);color:var(--bg);}
+.cbn{background:var(--border2);color:var(--dim);}
+/* INTEGRATIONS */
+.int-intro{text-align:center;max-width:680px;margin:0 auto 60px;}
+.lt-wrap{overflow:hidden;position:relative;margin-bottom:0;border-top:1px solid var(--border);}
+.lt-wrap:last-of-type{border-bottom:1px solid var(--border);}
+.lt-wrap::before,.lt-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;}
+.lt-wrap::before{left:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 100%);}
+.lt-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg) 0%,transparent 100%);}
+.lt{display:flex;width:max-content;}
+.lt-fwd{animation:ltScroll 38s linear infinite;}
+.lt-rev{animation:ltScroll 48s linear infinite reverse;}
+.lt-fwd2{animation:ltScroll 44s linear infinite;}
+@keyframes ltScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lt:hover{animation-play-state:paused;}
+.li{display:flex;flex-direction:column;align-items:center;justify-content:center;width:150px;height:88px;border-right:1px solid var(--border);flex-shrink:0;padding:12px;background:var(--bg);transition:background .3s;gap:6px;}
+.li:hover{background:var(--s);}
+.li img{max-width:32px;max-height:32px;object-fit:contain;filter:grayscale(1) brightness(.45);transition:filter .3s;}
+.li:hover img{filter:grayscale(0) brightness(1);}
+.li span{font-size:9px;color:var(--muted);letter-spacing:.05em;text-align:center;line-height:1.3;}
+.li:hover span{color:var(--dim);}
+.int-counts{display:flex;align-items:center;justify-content:center;gap:60px;padding:36px 32px;border:1px solid var(--border);background:var(--s);margin-top:40px;}
+.ic-i{}
+.ic-n{font-family:'Orbitron',monospace;font-size:44px;font-weight:700;color:var(--arc);line-height:1;text-shadow:0 0 20px rgba(0,229,255,.4);}
+.ic-l{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;}
+.ic-div{width:1px;height:50px;background:var(--border2);}
+/* VISION BANNER */
+.vbanner{border:1px solid var(--border2);background:var(--s);overflow:hidden;position:relative;padding:80px 72px;text-align:center;}
+.vbanner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.vbanner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--arc),transparent);}
+.vbg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.02) 1px,transparent 1px);background-size:30px 30px;}
+.vquote{position:relative;font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,38px);font-style:italic;color:var(--text);line-height:1.4;max-width:860px;margin:0 auto 36px;}
+.vquote::before{content:'"';position:absolute;top:-40px;left:-20px;font-size:120px;color:rgba(0,229,255,.08);font-style:normal;line-height:1;}
+.vquote span{color:var(--arc);}
+.vquote .go{color:var(--gold);}
+.vattr{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;}
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:52px;}
+.pillar{background:var(--bg);padding:40px 34px;position:relative;overflow:hidden;transition:background .35s;}
+.pillar:hover{background:rgba(0,229,255,.03);}
+.pline{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--arc),transparent);transform:scaleX(0);transition:transform .5s;}
+.pillar:hover .pline{transform:scaleX(1);}
+.pnum{font-family:'Orbitron',monospace;font-size:44px;font-weight:900;color:var(--border);line-height:1;margin-bottom:20px;transition:color .35s;}
+.pillar:hover .pnum{color:rgba(0,229,255,.1);}
+.picon{font-size:26px;margin-bottom:14px;display:block;}
+.ptitle{font-family:'Orbitron',monospace;font-size:12px;font-weight:600;color:var(--text);letter-spacing:.07em;margin-bottom:12px;line-height:1.3;}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.7;}
+/* INVEST */
+.inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.icard{border:1px solid var(--border2);background:var(--s);overflow:hidden;position:relative;transition:all .35s;}
+.icard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.icard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.icard.ip::before{background:linear-gradient(90deg,var(--arc),var(--gold));opacity:1;}
+.icard.is::before{background:linear-gradient(90deg,var(--gold),var(--arc));opacity:0;transition:opacity .3s;}
+.icard.is:hover::before{opacity:1;}
+.iinner{padding:44px 40px;}
+.itag{display:inline-flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;padding:5px 12px;margin-bottom:22px;border:1px solid;}
+.t-inv{background:rgba(0,229,255,.08);color:var(--arc);border-color:rgba(0,229,255,.2);}
+.t-acq{background:rgba(255,184,0,.08);color:var(--gold);border-color:rgba(255,184,0,.2);}
+.ititle{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--text);letter-spacing:.04em;margin-bottom:14px;line-height:1.2;}
+.idesc{font-size:14px;color:var(--dim);line-height:1.75;margin-bottom:28px;}
+.ipts{display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.ipt{display:flex;align-items:flex-start;gap:12px;font-size:12px;color:var(--dim);padding:9px 13px;background:var(--bg);border:1px solid var(--border);}
+.iptd{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.da{background:var(--arc);box-shadow:0 0 5px var(--arc);}
+.dg{background:var(--gold);box-shadow:0 0 5px var(--gold);}
+.icta{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:13px 26px;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);transition:all .3s;}
+.ca{background:var(--arc);color:var(--bg);}
+.ca:hover{background:#fff;}
+.cg{background:var(--gold);color:var(--bg);}
+.cg:hover{background:#fff;}
+/* CONTACT */
+.cw{border:1px solid var(--border2);background:var(--s);position:relative;overflow:hidden;padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.cw::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--arc),transparent);}
+.csub{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+.cname{font-family:'Orbitron',monospace;font-size:32px;font-weight:700;color:var(--text);letter-spacing:.07em;margin-bottom:6px;}
+.csub2{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--dim);margin-bottom:36px;}
+.ccards{display:flex;flex-direction:column;gap:10px;}
+.ccard{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid var(--border);background:var(--bg);text-decoration:none;transition:all .3s;position:relative;overflow:hidden;}
+.ccard::before{content:'';position:absolute;inset:0;background:rgba(0,229,255,.04);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.ccard:hover::before{transform:scaleX(1);}
+.ccard:hover{border-color:rgba(0,229,255,.3);transform:translateX(8px);}
+.ccav{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.1),rgba(0,229,255,.03));border:1px solid rgba(0,229,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--arc);flex-shrink:0;position:relative;z-index:1;}
+.ccinfo{flex:1;position:relative;z-index:1;}
+.ccn{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.ccr{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.cce{font-family:'Orbitron',monospace;font-size:10px;color:var(--arc);letter-spacing:.04em;}
+.ccarr{color:var(--muted);font-size:18px;transition:all .3s;position:relative;z-index:1;}
+.ccard:hover .ccarr{color:var(--arc);transform:translateX(4px);}
+.mquote{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:24px;padding-left:18px;border-left:2px solid var(--arc);}
+.mbody{font-size:14px;color:var(--dim);line-height:1.8;margin-bottom:28px;}
+.mbody strong{color:var(--text);font-weight:500;}
+.eabox{border:1px solid rgba(255,184,0,.22);background:rgba(255,184,0,.04);padding:22px;position:relative;}
+.eabox::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);}
+.eatitle{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.eadesc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.eaemails{display:flex;flex-direction:column;gap:5px;}
+.eae{font-family:'Orbitron',monospace;font-size:10px;color:var(--arc);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.eae:hover{color:#fff;}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36px 64px;display:flex;align-items:center;justify-content:space-between;}
+.fl{font-family:'Orbitron',monospace;font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--dim);}
+.fl span{color:var(--arc);}
+.fm{font-size:11px;color:var(--muted);text-align:center;letter-spacing:.04em;}
+.fr{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.14em;color:var(--muted);text-align:right;}
+/* DIVIDER */
+.div-line{max-width:1320px;margin:0 auto;padding:0 64px;position:relative;z-index:1;}
+.div-line::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.rev.vis{opacity:1;transform:translateY(0);}
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:18px 32px;}
+  .nav-links{display:none;}
+  .sec{padding:100px 32px;}
+  .narada-grid{grid-template-columns:1fr;gap:60px;}
+  .reactor-wrap{height:300px;}
+  .demo-body{grid-template-columns:1fr;}
+  .dsbar{display:none;}
+  .pillars{grid-template-columns:1fr 1fr;}
+  .inv-grid{grid-template-columns:1fr;}
+  .cw{grid-template-columns:1fr;gap:44px;padding:40px;}
+  footer{flex-direction:column;gap:14px;text-align:center;padding:30px;}
+  .div-line{padding:0 32px;}
+  .vbanner{padding:50px 32px;}
+  .int-counts{gap:30px;flex-wrap:wrap;padding:24px;}
+}
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .hero{padding:0 20px;}
+  .pillars{grid-template-columns:1fr;}
+  .sec{padding:80px 20px;}
+  .cw{padding:28px 20px;}
+  .div-line{padding:0 20px;}
+  .vbanner{padding:36px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo">
+    <div class="logo-mark"><div class="logo-ring"></div><div class="logo-core"></div></div>
+    <div class="logo-text">Chaos<span>Crafted</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#narada">Narada</a></li>
+    <li><a href="#integrations">Integrations</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#invest">Partner With Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#invest" class="nav-cta">Partner With Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-beam"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-status"><span class="status-dot"></span>System Online — Active Development</div>
+    <div>
+      <span class="narada-label">Introducing</span>
+      <span class="narada-name">NARADA</span>
+      <span class="narada-sub">Your Workplace. One Conversation. Every Tool.</span>
+    </div>
+    <p class="hero-tagline">The AI that <span>connects every tool your company uses</span><br>and lets your team <span class="go">talk to all of them at once.</span></p>
+    <p class="hero-desc">Imagine having an intelligent co-pilot that knows your emails, your calendar, your HR data, your tasks, and your team — and can act on any of them, instantly, through a single conversation. That's Narada.</p>
+    <div class="hero-actions">
+      <a href="#invest" class="btn-arc">Partner With Us →</a>
+      <a href="#narada" class="btn-ghost">See What We Built</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to Explore</div>
+</section>
+
+<!-- NARADA SECTION -->
+<section class="sec" id="narada">
+  <div class="narada-grid">
+    <div class="reactor-wrap rev">
+      <div class="reactor">
+        <div class="rr rr1"></div><div class="rr rr2"></div><div class="rr rr3"></div><div class="rr rr4"></div>
+        <div class="rcore"></div>
+        <div class="oi oi1">📧</div><div class="oi oi2">📅</div>
+        <div class="oi oi3">💼</div><div class="oi oi4">💬</div>
+        <div class="oi oi5">📊</div><div class="oi oi6">🕒</div>
+        <div class="oi oi7">👥</div><div class="oi oi8">📁</div>
+      </div>
+    </div>
+    <div class="rev">
+      <div class="eyebrow">Narada — The Core Intelligence</div>
+      <h2 class="sh2">Not Just Another<br><span>AI Chatbot.</span></h2>
+      <p class="slead">Narada is the intelligent layer that sits between your team and every tool they use — making them all accessible through a single, natural conversation.</p>
+      <p class="sbody">Most workplace tools exist in silos. You switch between email, calendar, HR portals, project trackers, payroll systems — losing focus with every context shift. <strong>Narada eliminates that entirely.</strong></p>
+      <p class="sbody">Tell Narada to reschedule your meetings, draft a status update, check your leave balance, approve a team request, pull this week's timesheets — and it does it. Across every tool. In seconds. <strong>With your permission at every step.</strong></p>
+      <p class="sbody">Narada works with the tools your organization already runs on — Slack, Microsoft Teams, Zoho People, Keka, Darwinbox, Clockify, ClickUp, Workday — <strong>whatever your team uses, Narada speaks its language.</strong></p>
+      <div class="cap-chips">
+        <div class="cap"><span class="d"></span>Natural Language Commands</div>
+        <div class="cap"><span class="d"></span>Multi-Tool Workflows</div>
+        <div class="cap"><span class="d"></span>Human Confirmation Gates</div>
+        <div class="cap"><span class="d"></span>Any AI Model</div>
+        <div class="cap"><span class="d"></span>Org-Level Controls</div>
+        <div class="cap"><span class="d"></span>Voice Ready</div>
+        <div class="cap"><span class="d"></span>BYOK Support</div>
+        <div class="cap"><span class="d"></span>Multi-Tenant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<div class="div-line"></div>
+<section class="sec" style="padding-top:100px;" id="demo">
+  <div class="eyebrow rev">Live Interaction</div>
+  <h2 class="sh2 rev" style="margin-bottom:36px;">Watch <span>Narada</span> Work</h2>
+  <div class="demo-box rev">
+    <div class="demo-top">
+      <div class="ddots"><span class="dd1"></span><span class="dd2"></span><span class="dd3"></span></div>
+      <div class="dtitle">Narada — Workplace AI Assistant</div>
+      <div class="dstatus">● ONLINE</div>
+    </div>
+    <div class="demo-body">
+      <div class="dsbar">
+        <div class="dsbst">Connected Tools</div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=32" alt=""><span class="dstn">Gmail</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=calendar.google.com&sz=32" alt=""><span class="dstn">Google Calendar</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=slack.com&sz=32" alt=""><span class="dstn">Slack</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=32" alt=""><span class="dstn">Zoho People</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" alt=""><span class="dstn">MS Teams</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=keka.com&sz=32" alt=""><span class="dstn">Keka HR</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=clockify.me&sz=32" alt=""><span class="dstn">Clockify</span><span class="dsts"></span></div>
+        <div class="dstool"><img src="https://www.google.com/s2/favicons?domain=darwinbox.com&sz=32" alt=""><span class="dstn">Darwinbox</span><span class="dsts"></span></div>
+      </div>
+      <div class="dchat">
+        <div class="cm usr">
+          <div class="cav cav-u">🧑</div>
+          <div class="cb ub">Rahul has applied for leave next Friday. Check if anything conflicts, and approve it if we're clear.</div>
+        </div>
+        <div class="cm">
+          <div class="cav cav-j">J</div>
+          <div class="cb jb">
+            Checked Zoho People, your team calendar, and Slack status...
+            <br><span class="ap done">✓ Leave request found</span><span class="ap done">✓ No calendar conflicts</span><span class="ap done">✓ No deadline clashes</span><br><br>
+            Friday is clear. Ready to approve Rahul's Casual Leave and notify him.
+            <div class="cconf">
+              <div class="cconf-t">⚡ APPROVAL REQUIRED</div>
+              <div class="cconf-d">Approve Rahul's Casual Leave — Friday, March 20 (1 day). Notification via HR system + Slack.</div>
+              <div class="cconf-btns"><button class="cconf-btn cby">Approve →</button><button class="cconf-btn cbn">Cancel</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="cm usr">
+          <div class="cav cav-u">🧑</div>
+          <div class="cb ub">Approve. Also, block my calendar for a team lunch that day — 1pm, 90 minutes.</div>
+        </div>
+        <div class="cm">
+          <div class="cav cav-j">J</div>
+          <div class="cb jb">
+            Done on both fronts.<br>
+            <span class="ap done">✓ Leave approved — Rahul notified</span><span class="ap done">✓ Team Lunch blocked 1–2:30 PM</span><span class="ap info">ℹ Slack message sent to Rahul</span><br><br>
+            Anything else for Friday, or shall I prep your morning brief?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<div class="div-line"></div>
+<section class="sec" id="integrations" style="padding-top:100px;padding-bottom:60px;">
+  <div class="int-intro rev">
+    <div class="eyebrow" style="justify-content:center;">Tool Ecosystem</div>
+    <h2 class="sh2" style="text-align:center;">Works With <span>Every Tool</span><br>Your Team Already Uses</h2>
+    <p style="font-size:14px;color:var(--dim);line-height:1.8;margin-top:14px;">No ripping and replacing. No new software for your team to learn. Narada connects to the tools you already run on — and brings them all into one conversation.</p>
+  </div>
+</section>
+
+<!-- Logo strips -->
+<div class="lt-wrap rev">
+  <div class="lt lt-fwd">
+    <!-- Indian HR Tools — Row 1 (duplicated for loop) -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=64" alt="Zoho People"><span>Zoho People</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=keka.com&sz=64" alt="Keka HR"><span>Keka HR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=greythr.com&sz=64" alt="greytHR"><span>greytHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=darwinbox.com&sz=64" alt="Darwinbox"><span>Darwinbox</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=pockethrms.com&sz=64" alt="Pocket HRMS"><span>Pocket HRMS</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=razorpay.com&sz=64" alt="RazorpayX"><span>RazorpayX Payroll</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=hrone.com&sz=64" alt="HROne"><span>HROne</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zinghr.com&sz=64" alt="ZingHR"><span>ZingHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=factohr.com&sz=64" alt="factoHR"><span>factoHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=kredily.com&sz=64" alt="Kredily"><span>Kredily</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zimyo.com&sz=64" alt="Zimyo"><span>Zimyo</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=qandle.com&sz=64" alt="Qandle"><span>Qandle</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=sumhr.com&sz=64" alt="sumHR"><span>sumHR</span></div>
+    <!-- duplicate -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=64" alt="Zoho People"><span>Zoho People</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=keka.com&sz=64" alt="Keka HR"><span>Keka HR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=greythr.com&sz=64" alt="greytHR"><span>greytHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=darwinbox.com&sz=64" alt="Darwinbox"><span>Darwinbox</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=pockethrms.com&sz=64" alt="Pocket HRMS"><span>Pocket HRMS</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=razorpay.com&sz=64" alt="RazorpayX"><span>RazorpayX Payroll</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=hrone.com&sz=64" alt="HROne"><span>HROne</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zinghr.com&sz=64" alt="ZingHR"><span>ZingHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=factohr.com&sz=64" alt="factoHR"><span>factoHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=kredily.com&sz=64" alt="Kredily"><span>Kredily</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zimyo.com&sz=64" alt="Zimyo"><span>Zimyo</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=qandle.com&sz=64" alt="Qandle"><span>Qandle</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=sumhr.com&sz=64" alt="sumHR"><span>sumHR</span></div>
+  </div>
+</div>
+
+<div class="lt-wrap rev">
+  <div class="lt lt-rev">
+    <!-- Global HR + Communication -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=slack.com&sz=64" alt="Slack"><span>Slack</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" alt="MS Teams"><span>Microsoft Teams</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=gusto.com&sz=64" alt="Gusto"><span>Gusto</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=rippling.com&sz=64" alt="Rippling"><span>Rippling</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=workday.com&sz=64" alt="Workday"><span>Workday</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=monday.com&sz=64" alt="Monday.com"><span>Monday.com</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=bamboohr.com&sz=64" alt="BambooHR"><span>BambooHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=adp.com&sz=64" alt="ADP Run"><span>ADP Run</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=deel.com&sz=64" alt="Deel"><span>Deel</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=hibob.com&sz=64" alt="HiBob"><span>HiBob</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=paylocity.com&sz=64" alt="Paylocity"><span>Paylocity</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zenefits.com&sz=64" alt="Zenefits"><span>Zenefits</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=connecteam.com&sz=64" alt="Connecteam"><span>Connecteam</span></div>
+    <!-- duplicate -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=slack.com&sz=64" alt="Slack"><span>Slack</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" alt="MS Teams"><span>Microsoft Teams</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=gusto.com&sz=64" alt="Gusto"><span>Gusto</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=rippling.com&sz=64" alt="Rippling"><span>Rippling</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=workday.com&sz=64" alt="Workday"><span>Workday</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=monday.com&sz=64" alt="Monday.com"><span>Monday.com</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=bamboohr.com&sz=64" alt="BambooHR"><span>BambooHR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=adp.com&sz=64" alt="ADP Run"><span>ADP Run</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=deel.com&sz=64" alt="Deel"><span>Deel</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=hibob.com&sz=64" alt="HiBob"><span>HiBob</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=paylocity.com&sz=64" alt="Paylocity"><span>Paylocity</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=zenefits.com&sz=64" alt="Zenefits"><span>Zenefits</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=connecteam.com&sz=64" alt="Connecteam"><span>Connecteam</span></div>
+  </div>
+</div>
+
+<div class="lt-wrap rev">
+  <div class="lt lt-fwd2">
+    <!-- Timesheets + Attendance + Remaining -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=clockify.me&sz=64" alt="Clockify"><span>Clockify</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=toggl.com&sz=64" alt="Toggl Track"><span>Toggl Track</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=clickup.com&sz=64" alt="ClickUp"><span>ClickUp</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=getharvest.com&sz=64" alt="Harvest"><span>Harvest</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=quickbooks.intuit.com&sz=64" alt="QuickBooks Time"><span>QuickBooks Time</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=homebase.com&sz=64" alt="Homebase"><span>Homebase</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=empmonitor.com&sz=64" alt="EmpMonitor"><span>EmpMonitor</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=truein.com&sz=64" alt="Truein"><span>Truein</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=akriviahcm.com&sz=64" alt="Akrivia HCM"><span>Akrivia HCM</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=saralhrm.com&sz=64" alt="Saral HRM"><span>Saral HRM</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=wallethr.com&sz=64" alt="Wallet HR"><span>Wallet HR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64" alt="Google Drive"><span>Google Workspace</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="Gmail"><span>Gmail</span></div>
+    <!-- duplicate -->
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=clockify.me&sz=64" alt="Clockify"><span>Clockify</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=toggl.com&sz=64" alt="Toggl Track"><span>Toggl Track</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=clickup.com&sz=64" alt="ClickUp"><span>ClickUp</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=getharvest.com&sz=64" alt="Harvest"><span>Harvest</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=quickbooks.intuit.com&sz=64" alt="QuickBooks Time"><span>QuickBooks Time</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=homebase.com&sz=64" alt="Homebase"><span>Homebase</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=empmonitor.com&sz=64" alt="EmpMonitor"><span>EmpMonitor</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=truein.com&sz=64" alt="Truein"><span>Truein</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=akriviahcm.com&sz=64" alt="Akrivia HCM"><span>Akrivia HCM</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=saralhrm.com&sz=64" alt="Saral HRM"><span>Saral HRM</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=wallethr.com&sz=64" alt="Wallet HR"><span>Wallet HR</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64" alt="Google Drive"><span>Google Workspace</span></div>
+    <div class="li"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="Gmail"><span>Gmail</span></div>
+  </div>
+</div>
+
+<div style="max-width:1320px;margin:0 auto;padding:0 64px;">
+  <div class="int-counts rev">
+    <div class="ic-i"><div class="ic-n">39+</div><div class="ic-l">Integrations Planned</div></div>
+    <div class="ic-div"></div>
+    <div class="ic-i"><div class="ic-n">4</div><div class="ic-l">AI Providers</div></div>
+    <div class="ic-div"></div>
+    <div class="ic-i"><div class="ic-n">1</div><div class="ic-l">Conversation</div></div>
+    <div class="ic-div"></div>
+    <div class="ic-i"><div class="ic-n">∞</div><div class="ic-l">Possibilities</div></div>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="div-line" style="margin-top:80px;"></div>
+<section class="sec" id="vision">
+  <div class="eyebrow rev">What We Believe</div>
+  <h2 class="sh2 rev" style="margin-bottom:40px;">Our <span>Vision</span></h2>
+  <div class="vbanner rev">
+    <div class="vbg"></div>
+    <div class="vquote">"We're not building a feature. We're building the <span>operating system</span> for the <span class="go">modern workplace.</span>"</div>
+    <div class="vattr">— ChaosCrafted, 2026</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><div class="pline"></div><div class="pnum">01</div><span class="picon">🌐</span><div class="ptitle">Tool-Agnostic by Design</div><div class="pdesc">Narada connects to the tools you already use — Slack or Teams, Darwinbox or Workday, Clockify or ClickUp. We build bridges, not walls. Your stack, your choice.</div></div>
+    <div class="pillar"><div class="pline"></div><div class="pnum">02</div><span class="picon">🧠</span><div class="ptitle">Any AI Model, Your Choice</div><div class="pdesc">Claude, GPT, Gemini, Grok — or your own private model. Narada is model-agnostic. The intelligence is pluggable, and you're never locked in to a single provider.</div></div>
+    <div class="pillar"><div class="pline"></div><div class="pnum">03</div><span class="picon">🔒</span><div class="ptitle">Trust at Every Step</div><div class="pdesc">Narada never acts unilaterally on irreversible actions. Approvals, emails, schedule changes — it always asks first. Powerful AI with iron-clad human control.</div></div>
+    <div class="pillar"><div class="pline"></div><div class="pnum">04</div><span class="picon">🏢</span><div class="ptitle">Built for Real Teams</div><div class="pdesc">Not a personal productivity toy. Narada is multi-tenant, role-aware, and org-configurable — purpose-built for companies of 50 to 5,000 employees.</div></div>
+    <div class="pillar"><div class="pline"></div><div class="pnum">05</div><span class="picon">🎙️</span><div class="ptitle">Voice is Next</div><div class="pdesc">"Hey Narada, what's on my plate today?" — A fully voice-enabled AI workplace assistant is the next frontier. We're already building it.</div></div>
+    <div class="pillar"><div class="pline"></div><div class="pnum">06</div><span class="picon">🚀</span><div class="ptitle">This is Just the Start</div><div class="pdesc">Narada is product one. ChaosCrafted is a GenAI studio with a long-term portfolio vision — eliminating workplace friction, one product at a time.</div></div>
+  </div>
+</section>
+
+<!-- INVEST -->
+<div class="div-line"></div>
+<section class="sec" id="invest">
+  <div class="eyebrow rev">Opportunity</div>
+  <h2 class="sh2 rev" style="margin-bottom:10px;">Let's Build This <span>Together</span></h2>
+  <p class="rev" style="font-size:14px;color:var(--dim);max-width:580px;line-height:1.8;margin-bottom:44px;">We're not hiring. We're building. And we're looking for the right partner — an investor who sees the vision, or an organization that wants to own it.</p>
+  <div class="inv-grid">
+    <div class="icard ip rev">
+      <div class="iinner">
+        <div class="itag t-inv">⚡ For Investors</div>
+        <div class="ititle">Back the Future<br>of Workplace AI</div>
+        <div class="idesc">The workplace tool market is enormous, fragmented, and overdue for disruption. Narada is positioned at exactly the right convergence point — with a team that ships.</div>
+        <div class="ipts">
+          <div class="ipt"><div class="iptd da"></div>39+ integrations across HR, payroll, communication, and productivity</div>
+          <div class="ipt"><div class="iptd da"></div>Model-agnostic — not tied to any single AI provider's fortunes</div>
+          <div class="ipt"><div class="iptd da"></div>Targeting the underserved mid-market: 50–5,000 employee companies</div>
+          <div class="ipt"><div class="iptd da"></div>Proven builders — functional product already in development</div>
+        </div>
+        <a href="mailto:satishmajeti@chaoscrafted.com?subject=Investment Inquiry — ChaosCrafted / Narada" class="icta ca">Explore Investment →</a>
+      </div>
+    </div>
+    <div class="icard is rev">
+      <div class="iinner">
+        <div class="itag t-acq">🏆 For Acquirers</div>
+        <div class="ititle">Acquire a Head<br>Start in AI</div>
+        <div class="idesc">Building a workplace AI product from scratch takes 12–18 months. We've done the architecture, the integrations, the intelligence, and the product design. You could own it all.</div>
+        <div class="ipts">
+          <div class="ipt"><div class="iptd dg"></div>Complete product IP — architecture, integrations, agent intelligence</div>
+          <div class="ipt"><div class="iptd dg"></div>Extensible platform — white-label it, brand it, scale it your way</div>
+          <div class="ipt"><div class="iptd dg"></div>India & global market ready — designed for scale from day one</div>
+          <div class="ipt"><div class="iptd dg"></div>Strategic fit for any HR, SaaS, or productivity company seeking AI</div>
+        </div>
+        <a href="mailto:sasiboyapati@chaoscrafted.com?subject=Acquisition Inquiry — ChaosCrafted / Narada" class="icta cg">Explore Acquisition →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="div-line"></div>
+<section class="sec" id="contact">
+  <div class="eyebrow rev">Get In Touch</div>
+  <h2 class="sh2 rev" style="margin-bottom:36px;">The <span>Team</span></h2>
+  <div class="cw rev">
+    <div>
+      <div class="csub">ChaosCrafted</div>
+      <div class="cname">The Founders</div>
+      <div class="csub2">Two builders. One vision. All in.</div>
+      <div class="ccards">
+        <a href="mailto:satishmajeti@chaoscrafted.com" class="ccard">
+          <div class="ccav">SM</div>
+          <div class="ccinfo">
+            <div class="ccn">Satish Majeti</div>
+            <div class="ccr">Co-Founder · Product & Architecture</div>
+            <div class="cce">satishmajeti@chaoscrafted.com</div>
+          </div>
+          <div class="ccarr">→</div>
+        </a>
+        <a href="mailto:sasiboyapati@chaoscrafted.com" class="ccard">
+          <div class="ccav">SB</div>
+          <div class="ccinfo">
+            <div class="ccn">Sasi Boyapati</div>
+            <div class="ccr">Co-Founder · Engineering & Systems</div>
+            <div class="cce">sasiboyapati@chaoscrafted.com</div>
+          </div>
+          <div class="ccarr">→</div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="mquote">"We are GenAI enthusiasts who believe the best human work happens when tools get out of the way."</div>
+      <div class="mbody">We started ChaosCrafted because we kept asking ourselves: <strong>why does it still take so many clicks, tabs, and tool switches to do things that should take one sentence?</strong><br><br>We're not a big team. We're not backed by a fund (yet). We're builders who saw an opportunity and moved — fast, deliberately, and with a long-term view.<br><br>If you're an investor, an enterprise buyer, or a visionary who sees where this is going — <strong>we want to talk.</strong></div>
+      <div class="eabox">
+        <div class="eatitle">⚡ Reach Out Directly</div>
+        <div class="eadesc">Investors, potential acquirers, and organizations interested in early access — every message gets a personal reply from the founders themselves.</div>
+        <div class="eaemails">
+          <a href="mailto:satishmajeti@chaoscrafted.com" class="eae">→ satishmajeti@chaoscrafted.com</a>
+          <a href="mailto:sasiboyapati@chaoscrafted.com" class="eae">→ sasiboyapati@chaoscrafted.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">Chaos<span>Crafted</span></div>
+  <div class="fm">© 2026 ChaosCrafted. All rights reserved.<br><span style="font-size:10px;color:var(--muted);">Narada is under active development. Integration list represents the planned roadmap.</span></div>
+  <div class="fr">chaoscrafted.com<br><span style="color:var(--muted);">Vijayawada, India</span></div>
+</footer>
+
+<script>
+// Cursor glow
+const cg = document.getElementById('cg');
+document.addEventListener('mousemove', e => {
+  cg.style.left = e.clientX + 'px';
+  cg.style.top = e.clientY + 'px';
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+// Stagger pillars and cards
+document.querySelectorAll('.pillars, .inv-grid, .ccards, .ipts').forEach(parent => {
+  Array.from(parent.children).forEach((c, i) => {
+    c.style.transitionDelay = (i * 0.07) + 's';
+  });
+});
+
+// Confirm button interaction
+document.querySelectorAll('.cby').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const conf = this.closest('.cconf');
+    conf.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:10px;color:#00ff88;letter-spacing:.1em;">✓ APPROVED — Rahul notified via HR system and Slack</div>';
+  });
+});
+</script>
+
+</body>
+</html>
