@@ -39,45 +39,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif;
-      overflow-x: hidden;
-      cursor: none
-    }
-
-    /* CURSOR */
-    #cur {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: var(--cyan);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: screen;
-      transition: width .15s, height .15s
-    }
-
-    #cur-ring {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid rgba(50, 173, 230, .3);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width .12s, height .12s
-    }
-
-    .big-cur #cur {
-      width: 20px;
-      height: 20px
-    }
-
-    .big-cur #cur-ring {
-      width: 54px;
-      height: 54px;
-      border-color: rgba(50, 173, 230, .15)
+      overflow-x: hidden
     }
 
     /* PROGRESS */
@@ -172,7 +134,7 @@
       color: #fff;
       font-weight: 700;
       font-size: .75rem;
-      cursor: none;
+      cursor: pointer;
       text-decoration: none;
       display: inline-block;
       position: relative;
@@ -323,7 +285,7 @@
       color: #fff;
       font-weight: 700;
       font-size: .95rem;
-      cursor: none;
+      cursor: pointer;
       text-decoration: none;
       display: inline-block;
       position: relative;
@@ -357,7 +319,7 @@
       color: rgba(0, 0, 0, .55);
       font-weight: 700;
       font-size: .82rem;
-      cursor: none;
+      cursor: pointer;
       text-decoration: none;
       transition: all .2s;
       display: inline-block;
@@ -499,8 +461,7 @@
       font-size: clamp(2.2rem, 6vw, 5rem);
       font-weight: 900;
       letter-spacing: -.04em;
-      line-height: 1.1;
-      white-space: pre-line
+      line-height: 1.1
     }
 
     /* FEATURES SCROLLYTELLING */
@@ -559,8 +520,7 @@
       color: rgba(255, 255, 255, .42);
       line-height: 1.8;
       max-width: 560px;
-      margin: 0 auto 1.75rem;
-      white-space: pre-line
+      margin: 0 auto 1.75rem
     }
 
     .feat-visual {
@@ -1490,6 +1450,11 @@
       margin-left: .1rem
     }
 
+    /* ── MOBILE-ONLY CHAOS CARDS ─────────────────────────────────────────────── */
+    .chaos-mob-cards {
+      display: none
+    }
+
     @media(max-width:768px) {
       .nav-links {
         display: none
@@ -1518,7 +1483,7 @@
       background: #1d1d1f;
       color: #f5f5f7;
       border: none;
-      cursor: none;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2080,9 +2045,12 @@
       padding: 6px 13px;
       border: none;
       cursor: pointer;
-      font-weight: 700;
-      text-transform: uppercase;
-      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)
+      transition: opacity .15s, transform .1s
+    }
+
+    font-weight:700;
+    text-transform:uppercase;
+    clip-path:polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)
     }
 
     .cby {
@@ -2243,7 +2211,7 @@
       border: none;
       clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
       transition: transform .15s, filter .15s;
-      cursor: none
+      cursor: pointer
     }
 
     .pbtn:hover {
@@ -3276,13 +3244,554 @@
       background: rgba(255, 255, 255, .06);
       color: rgba(255, 255, 255, .35)
     }
+
+    /* ── COMPREHENSIVE MOBILE RESPONSIVE ─────────────────────────────────────── */
+    @media(max-width:768px) {
+
+      /* Nav */
+      nav {
+        padding: .85rem 1.25rem
+      }
+
+      /* General sections — reduce huge padding */
+      .sec {
+        padding: 4.5rem 1.25rem
+      }
+
+      .sec-h2 {
+        font-size: clamp(1.6rem, 7vw, 2.5rem)
+      }
+
+      /* Hero — push content up, black hole renders below */
+      .hero {
+        justify-content: flex-start;
+        padding-top: max(80px, 18vh)
+      }
+
+      #hero-cvs {
+        opacity: .65
+      }
+
+      .hero-content {
+        padding: 0 1.5rem
+      }
+
+      .hero-badge {
+        font-size: .62rem;
+        padding: .3rem .85rem
+      }
+
+      .hero-sub {
+        font-size: .88rem;
+        margin-bottom: 2rem;
+        max-width: 100%
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .55rem;
+        max-width: 300px;
+        margin: 0 auto
+      }
+
+      .btn-main,
+      .btn-ghost {
+        text-align: center;
+        padding: .85rem 1.25rem;
+        clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)
+      }
+
+      .scroll-hint {
+        bottom: 1.25rem
+      }
+
+      /* Chaos — show mobile cards, restyle section */
+      .chaos {
+        height: auto;
+        min-height: 0;
+        padding: 4.5rem 1.25rem 3.5rem;
+        flex-direction: column;
+        gap: 0
+      }
+
+      .chaos-bg {
+        display: none
+      }
+
+      .chaos-h {
+        font-size: clamp(1.65rem, 6.5vw, 2.2rem)
+      }
+
+      .chaos-screen {
+        width: 60px;
+        height: 44px;
+        font-size: 1.3rem;
+        margin: 1.1rem auto .35rem
+      }
+
+      .chaos-lines {
+        flex-wrap: wrap;
+        gap: .4rem;
+        justify-content: center
+      }
+
+      .chaos-mob-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem;
+        margin-top: 1.5rem;
+        width: 100%
+      }
+
+      .cmc {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, .11);
+        border-radius: 10px;
+        padding: .6rem .75rem;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, .09);
+        text-align: left
+      }
+
+      .cmc .np-header {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+        margin-bottom: .2rem
+      }
+
+      .cmc .np-icon {
+        font-size: .8rem
+      }
+
+      .cmc .np-app {
+        font-size: .52rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, .3)
+      }
+
+      .cmc .np-sender {
+        font-size: .68rem;
+        font-weight: 700;
+        color: rgba(0, 0, 0, .7);
+        margin-bottom: .1rem
+      }
+
+      .cmc .np-text {
+        font-size: .62rem;
+        color: rgba(0, 0, 0, .44);
+        line-height: 1.4;
+        margin-bottom: .25rem
+      }
+
+      [data-theme="dark"] .cmc {
+        background: #0e0e14;
+        border-color: rgba(255, 255, 255, .1);
+        box-shadow: 0 3px 14px rgba(0, 0, 0, .4)
+      }
+
+      [data-theme="dark"] .cmc .np-app {
+        color: rgba(255, 255, 255, .25)
+      }
+
+      [data-theme="dark"] .cmc .np-sender {
+        color: rgba(255, 255, 255, .7)
+      }
+
+      [data-theme="dark"] .cmc .np-text {
+        color: rgba(255, 255, 255, .36)
+      }
+
+      /* Story */
+      .story-time {
+        right: 1rem;
+        font-size: .72rem;
+        top: 4.5rem
+      }
+
+      .step-big {
+        white-space: normal !important;
+        font-size: clamp(1.8rem, 6.5vw, 3.5rem) !important
+      }
+
+      .story-step {
+        padding: 0 1.5rem
+      }
+
+      /* Features */
+      .feat-step {
+        padding: 0 1.25rem;
+        max-width: 100%
+      }
+
+      .feat-sub {
+        white-space: normal !important;
+        font-size: .84rem
+      }
+
+      .feat-title {
+        font-size: clamp(1.7rem, 6vw, 3rem)
+      }
+
+      .feat-emoji {
+        font-size: 3rem;
+        margin-bottom: .85rem
+      }
+
+      .feat-visual {
+        flex-direction: column;
+        align-items: center;
+        gap: .65rem
+      }
+
+      .waveform {
+        justify-content: center;
+        width: 100%
+      }
+
+      .fv-stat {
+        text-align: center;
+        padding: .6rem .85rem
+      }
+
+      .fv-stat strong {
+        font-size: 1.3rem
+      }
+
+      .approve-card {
+        flex-direction: column;
+        gap: .6rem;
+        text-align: center;
+        padding: .75rem 1rem
+      }
+
+      .cal-card {
+        padding: .85rem 1rem
+      }
+
+      .rp-doc {
+        min-width: 0;
+        width: 100%;
+        font-size: .7rem
+      }
+
+      .team-row {
+        gap: .3rem
+      }
+
+      .tm-chip {
+        font-size: .62rem;
+        padding: .22rem .5rem
+      }
+
+      .tm-av {
+        width: 15px;
+        height: 15px;
+        font-size: .48rem
+      }
+
+      /* Report section */
+      .doc-preview {
+        padding: 1.25rem;
+        font-size: .74rem
+      }
+
+      .dp-head {
+        font-size: .85rem
+      }
+
+      .steps {
+        gap: 1.25rem
+      }
+
+      .step-r {
+        gap: .75rem
+      }
+
+      .step-num {
+        width: 26px;
+        height: 26px;
+        font-size: .68rem;
+        flex-shrink: 0
+      }
+
+      /* Integrations */
+      .integ-cats {
+        gap: 1.25rem
+      }
+
+      .ig-label {
+        font-size: .6rem
+      }
+
+      .chip {
+        font-size: .72rem;
+        padding: .35rem .7rem
+      }
+
+      .is-item strong {
+        font-size: 1.8rem
+      }
+
+      .integ-custom {
+        padding: 1.1rem 1rem;
+        gap: 1rem
+      }
+
+      .integ-custom .ic-icon {
+        font-size: 1.4rem
+      }
+
+      /* Models */
+      .model-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: .65rem
+      }
+
+      .model-card {
+        padding: 1.1rem .85rem
+      }
+
+      .mi {
+        font-size: 1.5rem;
+        margin-bottom: .45rem
+      }
+
+      .mn {
+        font-size: .78rem
+      }
+
+      .md {
+        font-size: .64rem
+      }
+
+      .byok {
+        padding: 1.25rem 1rem
+      }
+
+      .byok h3 {
+        font-size: .9rem
+      }
+
+      .byok p {
+        font-size: .78rem
+      }
+
+      /* Partner */
+      .pcard {
+        padding: 1.75rem 1.25rem
+      }
+
+      .pcard-title {
+        font-size: 1.3rem
+      }
+
+      .pcard-desc {
+        font-size: .82rem
+      }
+
+      .pcard-pt {
+        font-size: .76rem;
+        padding: .55rem .75rem
+      }
+
+      .pbtn {
+        padding: .65rem 1.4rem;
+        font-size: .74rem
+      }
+
+      /* Team */
+      .founder-card {
+        padding: .9rem 1rem
+      }
+
+      .founder-av {
+        width: 38px;
+        height: 38px;
+        font-size: .72rem
+      }
+
+      .founder-name {
+        font-size: .88rem
+      }
+
+      .founder-role,
+      .founder-email {
+        font-size: .67rem
+      }
+
+      .team-quote {
+        font-size: .95rem
+      }
+
+      .team-body {
+        font-size: .82rem
+      }
+
+      .reach-box {
+        padding: 1rem 1.1rem
+      }
+
+      .reach-desc {
+        font-size: .76rem
+      }
+
+      .reach-email {
+        font-size: .76rem
+      }
+
+      /* Intelligence / reactor */
+      .explain-lead {
+        font-size: .95rem
+      }
+
+      .explain-body {
+        font-size: .82rem
+      }
+
+      .cap {
+        font-size: .65rem;
+        padding: .33rem .7rem
+      }
+
+      .cap-chips {
+        gap: .4rem;
+        margin-top: 1.25rem
+      }
+
+      /* Demo / live chat */
+      .demo-body {
+        min-height: 0
+      }
+
+      .dchat {
+        padding: 14px 12px;
+        gap: 12px
+      }
+
+      .cb {
+        max-width: calc(100vw - 88px);
+        font-size: .76rem;
+        line-height: 1.6;
+        padding: 9px 11px
+      }
+
+      .cm {
+        gap: 7px
+      }
+
+      .cav {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+        flex-shrink: 0
+      }
+
+      .ap {
+        font-size: .62rem;
+        padding: 2px 5px;
+        margin-top: 3px;
+        margin-right: 3px
+      }
+
+      .cconf {
+        padding: 9px 11px;
+        margin-top: 7px
+      }
+
+      .cconf-d {
+        font-size: .7rem;
+        line-height: 1.5
+      }
+
+      .cconf-btns {
+        gap: 5px
+      }
+
+      .cconf-btn {
+        font-size: .65rem;
+        padding: 5px 11px
+      }
+
+      .demo-top {
+        padding: 10px 14px
+      }
+
+      .dtitle {
+        font-size: .65rem
+      }
+
+      .dstatus {
+        font-size: .65rem
+      }
+
+      /* CTA */
+      .cta {
+        padding: 5.5rem 1.25rem
+      }
+
+      .cta-h {
+        font-size: clamp(1.75rem, 6vw, 3rem)
+      }
+
+      .cta-p {
+        font-size: .85rem;
+        max-width: 100%
+      }
+
+      .cta::before {
+        width: 280px;
+        height: 280px
+      }
+
+      /* Footer */
+      footer {
+        padding: 2rem 1.25rem;
+        font-size: .72rem
+      }
+
+      /* Theme toggle — smaller, lower */
+      #theme-toggle {
+        bottom: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem
+      }
+    }
+
+    /* ── TABLET FIXES (769px – 1024px) ──────────────────────────────────────── */
+    @media(min-width:769px) and (max-width:1024px) {
+      .sec {
+        padding: 6rem 2rem
+      }
+
+      .feat-step {
+        max-width: 580px
+      }
+
+      .narada-explain {
+        gap: 3rem
+      }
+
+      .model-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .demo-body {
+        min-height: 360px
+      }
+
+      .cb {
+        max-width: 360px
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <div id="cur"></div>
-  <div id="cur-ring"></div>
   <div id="prog"></div>
   <button id="theme-toggle" title="Toggle dark / light theme">🌙</button>
 
@@ -3385,6 +3894,45 @@
         <span class="cl-item">PRs waiting</span>
         <span class="cl-item">Leave ignored</span>
         <span class="cl-item">Client asking</span>
+      </div>
+      <!-- Mobile-only notification cards (desktop uses absolute positioned cards) -->
+      <div class="chaos-mob-cards">
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">💬</span><span class="np-app">Slack · DM</span></div>
+          <div class="np-sender">Rahul Kumar</div>
+          <div class="np-text">Can you unblock AUTH-234? Waiting since yesterday.</div>
+          <span class="np-badge" style="background:rgba(255,55,95,.18);color:#ff375f">Unread</span>
+        </div>
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">🐙</span><span class="np-app">GitHub</span></div>
+          <div class="np-sender">Priya · PR #87</div>
+          <div class="np-text">Open 3 days. 0 reviewers. Closes Friday.</div>
+          <span class="np-badge" style="background:rgba(74,144,217,.15);color:#7eb8f7">Review needed</span>
+        </div>
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">👥</span><span class="np-app">Zoho People</span></div>
+          <div class="np-sender">Arjun Mehta</div>
+          <div class="np-text">Leave Mar 23–24. Pending 3 days.</div>
+          <span class="np-badge" style="background:rgba(255,159,10,.12);color:#ff9f0a">Pending</span>
+        </div>
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">🔔</span><span class="np-app">PagerDuty</span></div>
+          <div class="np-sender">Incident #4821 · P2</div>
+          <div class="np-text">API latency 2.3s. Response required.</div>
+          <span class="np-badge" style="background:rgba(255,55,95,.2);color:#ff375f">🚨 P2</span>
+        </div>
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">🎯</span><span class="np-app">Jira · Sprint 12</span></div>
+          <div class="np-sender">Team Alpha</div>
+          <div class="np-text">3 issues blocked. No updates in 3 days.</div>
+          <span class="np-badge" style="background:rgba(255,55,95,.15);color:#ff375f">3 Blocked</span>
+        </div>
+        <div class="cmc">
+          <div class="np-header"><span class="np-icon">✉️</span><span class="np-app">Gmail · Client</span></div>
+          <div class="np-sender">TechCorp · Sarah M.</div>
+          <div class="np-text">"Where is the progress report?"</div>
+          <span class="np-badge" style="background:rgba(234,67,53,.15);color:#f87171">Reply needed</span>
+        </div>
       </div>
     </div>
 
@@ -3511,7 +4059,7 @@
         <div class="feat-tag" style="color:var(--cyan)">01 / TEAM DASHBOARD</div>
         <span class="feat-emoji">&#127962;</span>
         <h2 class="feat-title" style="color:var(--cyan)">Your whole team.<br>One screen.</h2>
-        <p class="feat-sub">Who's blocked. Who needs a review. Who submitted leave.\nNarada scans Jira + GitHub + Zoho
+        <p class="feat-sub">Who's blocked. Who needs a review. Who submitted leave.<br>Narada scans Jira + GitHub + Zoho
           for your entire team — before your first meeting.</p>
         <div class="feat-visual">
           <div class="fv-stat"><strong style="color:var(--rose)" class="fc" data-val="9">0</strong>Blocked tickets</div>
@@ -3550,8 +4098,8 @@
         <div class="feat-tag" style="color:var(--violet)">02 / NARADA REPORT</div>
         <span class="feat-emoji">&#128196;</span>
         <h2 class="feat-title" style="color:var(--violet)">Client reports<br>in seconds.</h2>
-        <p class="feat-sub">"Generate a client report for Project Alpha, last 2 weeks."\nNarada queries Jira + GitHub +
-          Notion simultaneously and writes the whole document.</p>
+        <p class="feat-sub">"Generate a client report for Project Alpha, last 2 weeks."<br>Narada queries Jira + GitHub
+          + Notion simultaneously and writes the whole document.</p>
         <div class="feat-visual">
           <div class="rp-doc">
             <div class="rp-li">Auth redesign (PR #87) &mdash; shipped Mar 12</div>
@@ -3566,7 +4114,7 @@
         <div class="feat-tag" style="color:#30d158">03 / LEAVE APPROVAL</div>
         <span class="feat-emoji">&#9989;</span>
         <h2 class="feat-title" style="color:#30d158">Approve<br>with one message.</h2>
-        <p class="feat-sub">Notified the moment a request comes in. Review in chat.\nApprove or reject &mdash; Zoho,
+        <p class="feat-sub">Notified the moment a request comes in. Review in chat.<br>Approve or reject &mdash; Zoho,
           Keka, Darwinbox, or any HR system updates instantly. No app switching.</p>
         <div class="feat-visual">
           <div class="approve-card">
@@ -3580,8 +4128,8 @@
         <div class="feat-tag" style="color:var(--rose)">04 / VOICE INTERFACE</div>
         <span class="feat-emoji">&#127897;&#65039;</span>
         <h2 class="feat-title" style="color:var(--rose)">Hands-free<br>management.</h2>
-        <p class="feat-sub">Say &ldquo;Narada&rdquo; anywhere. Ask anything, take any action.\nFull AI voice I/O. Works
-          on web, mobile, commute &mdash; no screen needed.</p>
+        <p class="feat-sub">Say &ldquo;Narada&rdquo; anywhere. Ask anything, take any action.<br>Full AI voice I/O.
+          Works on web, mobile, commute &mdash; no screen needed.</p>
         <div class="feat-visual" id="wf-wrap"></div>
       </div>
 
@@ -3589,8 +4137,8 @@
         <div class="feat-tag" style="color:var(--gold)">05 / 1-ON-1 PREP</div>
         <span class="feat-emoji">&#128100;</span>
         <h2 class="feat-title" style="color:var(--gold)">Always ready<br>for your next meeting.</h2>
-        <p class="feat-sub">&ldquo;You have a 1-on-1 with Priya at 3 PM. Want a summary?&rdquo;\nHer Jira activity, open
-          PRs, Slack messages &mdash; ready before you walk in.</p>
+        <p class="feat-sub">&ldquo;You have a 1-on-1 with Priya at 3 PM. Want a summary?&rdquo;<br>Her Jira activity,
+          open PRs, Slack messages &mdash; ready before you walk in.</p>
         <div class="feat-visual">
           <div class="cal-card">
             <div class="cal-time">Today &bull; 3:00 PM</div>
@@ -4114,16 +4662,6 @@
   </footer>
 
   <script>
-    // ── CURSOR ────────────────────────────────────────────────────────────────────
-    const cur = document.getElementById('cur'), curR = document.getElementById('cur-ring');
-    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
-    document.querySelectorAll('a,button,.mag,.chip,.model-card').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('big-cur'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('big-cur'));
-    });
-    (function cl() { rx += (mx - rx) * .1; ry += (my - ry) * .1; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; requestAnimationFrame(cl) })();
-
     // ── SCROLL PROGRESS ────────────────────────────────────────────────────────────
     window.addEventListener('scroll', () => {
       document.getElementById('prog').style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
@@ -4156,7 +4694,7 @@
 
     let hT = 0;
     function renderHole() {
-      const cx = HW / 2, cy = HH / 2;
+      const cx = HW / 2, cy = isMobile ? HH * .76 : HH / 2;
       hctx.clearRect(0, 0, HW, HH);
 
       // Atmospheric glow (light theme: soft blue-purple mist radiating outward)
@@ -4400,6 +4938,72 @@
       b.addEventListener('mouseleave', () => b.style.transform = '');
     });
 
+    // ── DEMO CONFIRM / CANCEL BUTTONS ─────────────────────────────────────────────
+    (function () {
+      const confirmBtn = document.querySelector('.cconf-btn.cby');
+      const cancelBtn = document.querySelector('.cconf-btn.cbn');
+      const cconf = document.querySelector('.cconf');
+      const dchat = document.querySelector('.dchat');
+      if (!confirmBtn || !cconf || !dchat) return;
+
+      function addMsg(html, delay) {
+        return new Promise(res => setTimeout(() => {
+          const wrap = document.createElement('div');
+          wrap.className = 'cm';
+          wrap.innerHTML = `<div class="cav cav-j">N</div><div>${html}</div>`;
+          wrap.style.opacity = '0';
+          wrap.style.transform = 'translateY(10px)';
+          wrap.style.transition = 'opacity .4s ease, transform .4s ease';
+          dchat.appendChild(wrap);
+          dchat.scrollTop = dchat.scrollHeight;
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            wrap.style.opacity = '1';
+            wrap.style.transform = 'translateY(0)';
+          }));
+          res();
+        }, delay));
+      }
+
+      confirmBtn.addEventListener('click', async () => {
+        // Disable buttons to prevent double click
+        confirmBtn.style.opacity = '.5';
+        cancelBtn.style.opacity = '.5';
+        confirmBtn.disabled = cancelBtn.disabled = true;
+
+        // Step 1 — processing state
+        cconf.innerHTML = `
+      <div class="cconf-t" style="color:#32ade6">⏳ Processing…</div>
+      <div class="cconf-d">Sending requests to Zoho People and GitHub…</div>`;
+
+        await addMsg(`
+      <div class="cb jb">
+        <span class="ap done">✓ Leave approved — Arjun Mehta · Mar 23–24 · Zoho People</span>
+        <span class="ap done">✓ Reviewer assigned — Sanjay → PR #87 · GitHub</span>
+      </div>`, 900);
+
+        // Step 2 — replace cconf with success confirmation
+        cconf.style.transition = 'opacity .3s';
+        cconf.style.opacity = '0';
+        setTimeout(() => {
+          cconf.style.display = 'none';
+        }, 300);
+
+        await addMsg(`
+      <div class="cb jb">
+        Both done. Arjun will receive a leave-approval notification and Sanjay gets a reviewer request on GitHub. Anything else?
+      </div>`, 600);
+
+        dchat.scrollTop = dchat.scrollHeight;
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        cconf.style.transition = 'opacity .25s';
+        cconf.style.opacity = '0';
+        setTimeout(() => cconf.style.display = 'none', 250);
+        addMsg(`<div class="cb jb" style="opacity:.7">Cancelled. No changes were made. Let me know if you need anything else.</div>`, 200);
+      });
+    })();
+
     // ── THEME TOGGLE ───────────────────────────────────────────────────────────────
     (function () {
       const btn = document.getElementById('theme-toggle');
@@ -4416,8 +5020,6 @@
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('narada-theme', next);
         btn.textContent = isDark ? '🌙' : '☀️';
-        // Cursor color update
-        document.getElementById('cur').style.background = isDark ? '#0071e3' : '#32ade6';
       });
     })();
   </script>
