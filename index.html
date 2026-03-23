@@ -173,7 +173,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: max(96px, 13vh);
       overflow: hidden;
       text-align: center
     }
@@ -859,6 +860,35 @@
       color: rgba(255, 255, 255, .55);
       transition: all .2s;
       cursor: default
+    }
+
+    .chip-logo {
+      width: 15px;
+      height: 15px;
+      object-fit: contain;
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: block
+    }
+
+    .mi img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, .08);
+      padding: 6px
+    }
+
+    @media(max-width:768px) {
+      .mi img {
+        width: 40px;
+        height: 40px;
+        border-radius: 9px;
+        padding: 5px
+      }
     }
 
     .chip:hover {
@@ -2954,6 +2984,14 @@
       box-shadow: none
     }
 
+    [data-theme="dark"] .rp-li {
+      color: rgba(255, 255, 255, .45)
+    }
+
+    [data-theme="dark"] .rp-li::before {
+      color: var(--violet)
+    }
+
     [data-theme="dark"] .tm-chip {
       background: rgba(255, 255, 255, .04);
       border-color: rgba(255, 255, 255, .08);
@@ -3262,14 +3300,13 @@
         font-size: clamp(1.6rem, 7vw, 2.5rem)
       }
 
-      /* Hero — push content up, black hole renders below */
+      /* Hero mobile tweaks */
       .hero {
-        justify-content: flex-start;
-        padding-top: max(80px, 18vh)
+        padding-top: max(72px, 12vh)
       }
 
       #hero-cvs {
-        opacity: .65
+        opacity: .7
       }
 
       .hero-content {
@@ -4484,37 +4521,38 @@
       <div class="model-grid">
         <div class="model-card rev" style="transition-delay:.04s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#32ade6,#0070f3)"></div>
-          <div class="mi">&#129302;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=128" alt="Claude"></div>
           <div class="mn">Claude</div>
           <div class="md">Best reasoning</div>
         </div>
         <div class="model-card rev" style="transition-delay:.08s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#30d158,#3b82f6)"></div>
-          <div class="mi">&#127758;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" alt="GPT-4o"></div>
           <div class="mn">GPT-4o</div>
           <div class="md">Fastest</div>
         </div>
         <div class="model-card rev" style="transition-delay:.12s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#4285f4,#ea4335)"></div>
-          <div class="mi">&#128142;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128" alt="Gemini">
+          </div>
           <div class="mn">Gemini</div>
           <div class="md">Multimodal</div>
         </div>
         <div class="model-card rev" style="transition-delay:.16s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#ff375f,#bf5af2)"></div>
-          <div class="mi">&#128293;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=128" alt="Mistral"></div>
           <div class="mn">Mistral</div>
           <div class="md">Efficient</div>
         </div>
         <div class="model-card rev" style="transition-delay:.2s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#ff9f0a,#ff375f)"></div>
-          <div class="mi">&#9889;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=grok.com&sz=128" alt="Grok"></div>
           <div class="mn">Grok</div>
           <div class="md">Real-time</div>
         </div>
         <div class="model-card rev" style="transition-delay:.24s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"></div>
-          <div class="mi">&#129422;</div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=meta.ai&sz=128" alt="Llama"></div>
           <div class="mn">Llama</div>
           <div class="md">Open source</div>
         </div>
@@ -4694,7 +4732,7 @@
 
     let hT = 0;
     function renderHole() {
-      const cx = HW / 2, cy = isMobile ? HH * .76 : HH / 2;
+      const cx = HW / 2, cy = isMobile ? HH * .72 : HH * .82;
       hctx.clearRect(0, 0, HW, HH);
 
       // Atmospheric glow (light theme: soft blue-purple mist radiating outward)
@@ -4732,14 +4770,15 @@
         hctx.fill();
       });
 
-      // Tool logos
-      if (!isMobile) TOOLS.forEach(t => {
+      // Tool logos — shown on all devices, smaller radius on mobile
+      TOOLS.forEach(t => {
         t.a += t.spd;
-        const x = cx + Math.cos(t.a) * t.r;
-        const y = cy + Math.sin(t.a) * t.r * .42;
+        const tr = isMobile ? t.r * .52 : t.r;
+        const x = cx + Math.cos(t.a) * tr;
+        const y = cy + Math.sin(t.a) * tr * .42;
         const al = .5 + .3 * Math.sin(t.a * 2 + hT);
         hctx.save(); hctx.globalAlpha = al;
-        hctx.font = '22px serif'; hctx.textAlign = 'center'; hctx.textBaseline = 'middle';
+        hctx.font = `${isMobile ? 15 : 22}px serif`; hctx.textAlign = 'center'; hctx.textBaseline = 'middle';
         hctx.fillText(t.e, x, y); hctx.restore();
       });
 
@@ -5020,6 +5059,68 @@
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('narada-theme', next);
         btn.textContent = isDark ? '🌙' : '☀️';
+      });
+    })();
+
+    // ── CHIP LOGOS ────────────────────────────────────────────────────────────────
+    (function () {
+      const CHIP_LOGOS = {
+        // Indian HR
+        'Zoho People': 'zoho.com',
+        'Keka HR': 'keka.com',
+        'greytHR': 'greythr.com',
+        'Darwinbox': 'darwinbox.com',
+        'HROne': 'hrone.cloud',
+        'factoHR': 'factohr.com',
+        'ZingHR': 'zinghr.com',
+        'Pocket HRMS': 'pockethrms.com',
+        'Kredily': 'kredily.com',
+        'Zimyo': 'zimyo.com',
+        // Global HR
+        'Workday': 'workday.com',
+        'BambooHR': 'bamboohr.com',
+        'Rippling': 'rippling.com',
+        'Gusto': 'gusto.com',
+        'Deel': 'letsdeel.com',
+        'ADP Run': 'adp.com',
+        'HiBob': 'hibob.com',
+        'Paylocity': 'paylocity.com',
+        'Connecteam': 'connecteam.com',
+        // Comms / Productivity
+        'Slack': 'slack.com',
+        'Microsoft Teams': 'teams.microsoft.com',
+        'Gmail': 'gmail.com',
+        'Google Calendar': 'calendar.google.com',
+        'Outlook': 'outlook.com',
+        'Google Drive': 'drive.google.com',
+        'OneDrive': 'onedrive.live.com',
+        'Notion': 'notion.so',
+        // Time / Ops
+        'Clockify': 'clockify.me',
+        'Toggl Track': 'toggl.com',
+        'ClickUp': 'clickup.com',
+        'Monday.com': 'monday.com',
+        'Harvest': 'getharvest.com',
+        'Truein': 'truein.com',
+        'Akrivia HCM': 'akriviahcm.com',
+        // Dev / Ops
+        'Jira': 'jira.atlassian.com',
+        'GitHub': 'github.com',
+        'Linear': 'linear.app',
+        'HubSpot': 'hubspot.com',
+        'PagerDuty': 'pagerduty.com',
+        'ServiceNow': 'servicenow.com'
+      };
+      document.querySelectorAll('.chip:not(.chip-more)').forEach(chip => {
+        const name = chip.textContent.trim();
+        const domain = CHIP_LOGOS[name];
+        if (!domain) return;
+        const img = document.createElement('img');
+        img.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+        img.className = 'chip-logo';
+        img.alt = '';
+        img.onerror = function () { this.style.display = 'none' };
+        chip.insertBefore(img, chip.firstChild);
       });
     })();
   </script>
