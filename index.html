@@ -75,6 +75,25 @@
       text-decoration: none
     }
 
+    .nav-by {
+      font-size: .58rem;
+      color: rgba(0, 0, 0, .28);
+      letter-spacing: .04em;
+      margin-left: -.1rem;
+      padding: .18rem .48rem;
+      border: 1px solid rgba(0, 0, 0, .1);
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: color .2s, border-color .2s;
+      text-decoration: none
+    }
+
+    .nav-by:hover {
+      color: #0071e3;
+      border-color: rgba(0, 113, 227, .25)
+    }
+
     .nav-gem {
       width: 32px;
       height: 32px;
@@ -208,6 +227,40 @@
       background: rgba(255, 255, 255, .05);
       backdrop-filter: blur(10px);
       animation: fadeUp .8s ease both
+    }
+
+    .hero-wordmark {
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 2.5rem;
+      animation: fadeUp .8s .55s ease both;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      justify-content: center
+    }
+
+    .hero-wordmark strong {
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: .22em;
+      font-size: .85rem
+    }
+
+    .hero-wordmark span {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .hero-wordmark a {
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .hero-wordmark a:hover {
+      color: #fff
     }
 
     .badge-dot {
@@ -376,7 +429,7 @@
 
     /* STORY SCROLLYTELLING */
     .story {
-      height: 700vh;
+      height: 800vh;
       position: relative
     }
 
@@ -463,6 +516,135 @@
       font-weight: 900;
       letter-spacing: -.04em;
       line-height: 1.1
+    }
+
+    .step-solve {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(50, 173, 230, .14);
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .step-payoff {
+      margin: 1.5rem auto 0;
+      padding: 1.5rem 2rem;
+      background: rgba(50, 173, 230, .06);
+      border: 1px solid rgba(50, 173, 230, .18);
+      border-radius: 18px;
+      max-width: 580px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem
+    }
+
+    .sp-log {
+      display: inline-flex;
+      flex-direction: column;
+      gap: .28rem
+    }
+
+    .sp-stat-row {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      padding-top: .85rem;
+      border-top: 1px solid rgba(50, 173, 230, .12);
+      flex-wrap: wrap
+    }
+
+    .sp-stat {
+      text-align: center
+    }
+
+    .sp-stat-n {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #32ade6;
+      line-height: 1;
+      letter-spacing: -.03em
+    }
+
+    .sp-stat-l {
+      font-size: .6rem;
+      color: rgba(50, 173, 230, .45);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .2rem
+    }
+
+    .step-sol-hd {
+      display: flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .step-sol-badge {
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: #32ade6;
+      background: rgba(50, 173, 230, .1);
+      border: 1px solid rgba(50, 173, 230, .22);
+      padding: .18rem .52rem;
+      border-radius: 4px
+    }
+
+    .step-sol-time {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .2);
+      letter-spacing: .04em
+    }
+
+    .step-sol-acts {
+      display: inline-flex;
+      flex-direction: column;
+      gap: .32rem;
+      max-width: 480px
+    }
+
+    .step-sol-row {
+      display: flex;
+      align-items: baseline;
+      gap: .55rem;
+      font-size: clamp(.72rem, 1.2vw, .84rem);
+      color: rgba(255, 255, 255, .42)
+    }
+
+    .step-sol-ck {
+      color: #30d158;
+      font-size: .78rem;
+      flex-shrink: 0;
+      line-height: 1.6
+    }
+
+    .step-sol-src {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(50, 173, 230, .5);
+      min-width: 64px;
+      flex-shrink: 0
+    }
+
+    @media(max-width:768px) {
+      .step-solve {
+        margin-top: 1.25rem;
+        padding-top: 1rem
+      }
+
+      .step-sol-src {
+        min-width: 50px
+      }
     }
 
     /* FEATURES SCROLLYTELLING */
@@ -1506,25 +1688,25 @@
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      width: 44px;
-      height: 44px;
-      border-radius: 0;
-      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-      background: #1d1d1f;
-      color: #f5f5f7;
-      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .75);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
-      transition: background .2s, transform .15s
+      backdrop-filter: blur(12px);
+      transition: background .2s, border-color .2s, color .2s, transform .15s
     }
 
     #theme-toggle:hover {
-      transform: translateY(-2px);
-      background: #0071e3
+      background: rgba(255, 255, 255, .13);
+      border-color: rgba(255, 255, 255, .22);
+      color: #fff;
+      transform: translateY(-2px)
     }
 
     /* ── REACTOR / CORE INTELLIGENCE ──────────────────────────────────────── */
@@ -1795,6 +1977,420 @@
 
       .reactor-wrap {
         height: 280px
+      }
+    }
+
+    /* ── WHY NARADA ────────────────────────────────────────────────────────── */
+    .wn-sec {
+      position: relative;
+      overflow: hidden
+    }
+
+    .wn-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(191, 90, 242, .07) 0%, transparent 65%);
+      pointer-events: none
+    }
+
+    .wn-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      text-align: center
+    }
+
+    .wn-origin {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .3rem .85rem;
+      border: 1px solid rgba(191, 90, 242, .2);
+      border-radius: 50px;
+      background: rgba(191, 90, 242, .07);
+      margin-bottom: 2rem
+    }
+
+    .wn-origin-lang {
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #bf5af2
+    }
+
+    .wn-origin-text {
+      font-size: .7rem;
+      color: rgba(255, 255, 255, .35);
+      font-style: italic
+    }
+
+    .wn-quote {
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+      color: #f5f5f7;
+      margin-bottom: 1.5rem
+    }
+
+    .wn-quote em {
+      font-style: normal;
+      background: linear-gradient(135deg, #bf5af2, #32ade6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .wn-body {
+      font-size: .9rem;
+      color: rgba(255, 255, 255, .42);
+      line-height: 1.85;
+      max-width: 580px;
+      margin: 0 auto 2.5rem
+    }
+
+    .wn-body strong {
+      color: rgba(255, 255, 255, .75);
+      font-weight: 600
+    }
+
+    .wn-traits {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: .5rem
+    }
+
+    .wn-trait {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .85rem;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .03);
+      font-size: .72rem;
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .wn-trait-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0
+    }
+
+    @media(max-width:768px) {
+      .wn-quote {
+        font-size: 1.4rem
+      }
+
+      .wn-body {
+        font-size: .82rem
+      }
+    }
+
+    /* ── DAY IN THE LIFE ──────────────────────────────────────────────────── */
+    .day-sec {
+      position: relative;
+      overflow: hidden
+    }
+
+    .day-bg-glow {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(191, 90, 242, .07) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0
+    }
+
+    .day-tl {
+      position: relative;
+      max-width: 740px;
+      margin: 0 auto;
+      padding-bottom: 1rem
+    }
+
+    .day-spine {
+      position: absolute;
+      left: 27px;
+      top: 20px;
+      bottom: 20px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(191, 90, 242, .22) 8%, rgba(50, 173, 230, .18) 80%, transparent);
+      pointer-events: none
+    }
+
+    .day-evt {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: flex-start;
+      position: relative
+    }
+
+    /* day-evt-r removed — all dots stay on the left spine */
+    .day-dot {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .3);
+      z-index: 1;
+      position: relative
+    }
+
+    .day-dot-nr {
+      background: rgba(50, 173, 230, .1);
+      border-color: rgba(50, 173, 230, .28);
+      color: #32ade6
+    }
+
+    .day-dot-you {
+      background: rgba(191, 90, 242, .1);
+      border-color: rgba(191, 90, 242, .28);
+      color: #bf5af2
+    }
+
+    .day-dot-done {
+      background: rgba(48, 209, 88, .12);
+      border-color: rgba(48, 209, 88, .35);
+      color: #30d158;
+      font-size: 1rem
+    }
+
+    .day-card {
+      flex: 1;
+      padding: 1.25rem 1.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .day-card-you {
+      background: rgba(191, 90, 242, .05);
+      border-color: rgba(191, 90, 242, .14)
+    }
+
+    .day-card-act {
+      background: rgba(50, 173, 230, .04);
+      border-color: rgba(50, 173, 230, .12)
+    }
+
+    .day-meta {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .65rem;
+      flex-wrap: wrap
+    }
+
+    .day-time {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .67rem;
+      color: rgba(255, 255, 255, .22);
+      letter-spacing: .05em
+    }
+
+    .day-src {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .18rem .52rem;
+      border-radius: 50px
+    }
+
+    .day-src-zoho {
+      background: rgba(255, 159, 10, .1);
+      color: #ff9f0a;
+      border: 1px solid rgba(255, 159, 10, .2)
+    }
+
+    .day-src-nr {
+      background: rgba(50, 173, 230, .1);
+      color: #32ade6;
+      border: 1px solid rgba(50, 173, 230, .2)
+    }
+
+    .day-src-you {
+      background: rgba(191, 90, 242, .1);
+      color: #bf5af2;
+      border: 1px solid rgba(191, 90, 242, .2)
+    }
+
+    .day-body {
+      font-size: .84rem;
+      color: rgba(255, 255, 255, .5);
+      line-height: 1.7
+    }
+
+    .day-body strong {
+      color: rgba(255, 255, 255, .82);
+      font-weight: 600
+    }
+
+    .day-nr-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      margin-top: .8rem;
+      padding-top: .7rem;
+      border-top: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .day-n-badge {
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #32ade6;
+      background: rgba(50, 173, 230, .1);
+      border: 1px solid rgba(50, 173, 230, .2);
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: .14rem;
+      white-space: nowrap
+    }
+
+    .day-n-text {
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .35);
+      line-height: 1.55
+    }
+
+    .day-actions {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-top: .25rem
+    }
+
+    .day-action-row {
+      display: flex;
+      align-items: baseline;
+      gap: .55rem;
+      font-size: .78rem
+    }
+
+    .da-check {
+      color: #30d158;
+      font-size: .8rem;
+      flex-shrink: 0;
+      line-height: 1.6
+    }
+
+    .da-src {
+      color: rgba(255, 255, 255, .25);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      min-width: 78px;
+      flex-shrink: 0
+    }
+
+    .da-text {
+      color: rgba(255, 255, 255, .5)
+    }
+
+    .day-payoff-wrap .day-card {
+      padding: 2rem 2.5rem;
+      background: linear-gradient(135deg, rgba(50, 173, 230, .07), rgba(191, 90, 242, .07)) !important;
+      border-color: rgba(50, 173, 230, .22) !important
+    }
+
+    .day-payoff-h {
+      font-size: clamp(1.45rem, 3.5vw, 2.1rem);
+      font-weight: 800;
+      color: #f5f5f7;
+      line-height: 1.15;
+      margin-bottom: .6rem;
+      letter-spacing: -.03em
+    }
+
+    .day-payoff-sub {
+      font-size: .88rem;
+      color: rgba(255, 255, 255, .38);
+      line-height: 1.75
+    }
+
+    .day-stat-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .day-stat {
+      text-align: center
+    }
+
+    .day-stat-n {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #32ade6;
+      line-height: 1
+    }
+
+    .day-stat-l {
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .28);
+      margin-top: .25rem;
+      letter-spacing: .04em
+    }
+
+    @media(max-width:768px) {
+      .day-spine {
+        left: 18px
+      }
+
+      .day-dot {
+        width: 38px;
+        height: 38px;
+        font-size: .7rem
+      }
+
+      .day-evt {
+        gap: .75rem;
+        margin-bottom: 1.85rem
+      }
+
+      .day-card {
+        padding: .9rem 1rem
+      }
+
+      .day-payoff-wrap .day-card {
+        padding: 1.25rem 1.1rem
+      }
+
+      .day-payoff-h {
+        font-size: 1.3rem
+      }
+
+      .da-src {
+        min-width: 60px
+      }
+
+      .day-stat-row {
+        gap: 1.25rem
       }
     }
 
@@ -2443,6 +3039,18 @@
     }
 
     /* ── LIGHT THEME ─────────────────────────────────────────────────────────── */
+    #theme-toggle {
+      background: rgba(0, 0, 0, .05);
+      border-color: rgba(0, 0, 0, .12);
+      color: rgba(0, 0, 0, .55)
+    }
+
+    #theme-toggle:hover {
+      background: rgba(0, 0, 0, .1);
+      border-color: rgba(0, 0, 0, .2);
+      color: #1d1d1f
+    }
+
     .nav-logo .nav-name {
       color: #1d1d1f
     }
@@ -2463,6 +3071,48 @@
       background: rgba(0, 0, 0, .04);
       border-color: rgba(0, 0, 0, .1);
       color: rgba(0, 0, 0, .45)
+    }
+
+    .hero-wordmark {
+      color: rgba(0, 0, 0, .38)
+    }
+
+    .hero-wordmark strong {
+      color: #1d1d1f
+    }
+
+    .hero-wordmark span {
+      color: rgba(0, 0, 0, .2)
+    }
+
+    .hero-wordmark a {
+      color: rgba(0, 0, 0, .45)
+    }
+
+    .hero-wordmark a:hover {
+      color: #0071e3
+    }
+
+    /* ss7 payoff card — light theme text fixes */
+    .step-sol-row {
+      color: rgba(0, 0, 0, .52)
+    }
+
+    .step-sol-time {
+      color: rgba(0, 0, 0, .28)
+    }
+
+    .step-payoff {
+      background: rgba(0, 113, 227, .04);
+      border-color: rgba(0, 113, 227, .12)
+    }
+
+    .sp-stat-n {
+      color: #0071e3
+    }
+
+    .sp-stat-l {
+      color: rgba(0, 113, 227, .45)
     }
 
     .badge-dot {
@@ -2816,6 +3466,16 @@
       color: #f5f5f7
     }
 
+    [data-theme="dark"] .nav-by {
+      color: rgba(255, 255, 255, .22);
+      border-color: rgba(255, 255, 255, .1)
+    }
+
+    [data-theme="dark"] .nav-by:hover {
+      color: #32ade6;
+      border-color: rgba(50, 173, 230, .25)
+    }
+
     [data-theme="dark"] .nav-links a {
       color: rgba(255, 255, 255, .42)
     }
@@ -2836,6 +3496,27 @@
 
     [data-theme="dark"] .hero-sub {
       color: rgba(255, 255, 255, .42)
+    }
+
+    [data-theme="dark"] .step-sol-row {
+      color: rgba(255, 255, 255, .42)
+    }
+
+    [data-theme="dark"] .step-sol-time {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    [data-theme="dark"] .step-payoff {
+      background: rgba(50, 173, 230, .06);
+      border-color: rgba(50, 173, 230, .18)
+    }
+
+    [data-theme="dark"] .sp-stat-n {
+      color: #32ade6
+    }
+
+    [data-theme="dark"] .sp-stat-l {
+      color: rgba(50, 173, 230, .45)
     }
 
     [data-theme="dark"] .btn-ghost {
@@ -3231,8 +3912,9 @@
     }
 
     [data-theme="dark"] #theme-toggle {
-      background: #f5f5f7;
-      color: #1d1d1f
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .14);
+      color: rgba(255, 255, 255, .8)
     }
 
     [data-theme="dark"] .sec[style*="background:#f5f5f7"] {
@@ -3830,16 +4512,24 @@
 <body>
 
   <div id="prog"></div>
-  <button id="theme-toggle" title="Toggle dark / light theme">🌙</button>
+  <button id="theme-toggle" title="Toggle dark / light theme" aria-label="Toggle theme">
+    <svg id="ti-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  </button>
 
   <nav>
-    <a href="#" class="nav-logo">
-      <div class="nav-gem">N</div>
-      <span class="nav-name">Narada</span>
-    </a>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <a href="#" class="nav-logo">
+        <div class="nav-gem">N</div>
+        <span class="nav-name">Narada</span>
+      </a>
+      <a href="https://chaoscrafted.com" target="_blank" rel="noopener" class="nav-by">by ChaosCrafted</a>
+    </div>
     <ul class="nav-links">
       <li><a href="#story">The Problem</a></li>
       <li><a href="#feats">Features</a></li>
+      <li><a href="#why-narada">Why Narada</a></li>
       <li><a href="#intelligence">How It Works</a></li>
       <li><a href="#integrations">Integrations</a></li>
       <li><a href="#partner">Partner</a></li>
@@ -3852,7 +4542,8 @@
   <section class="hero">
     <canvas id="hero-cvs"></canvas>
     <div class="hero-content">
-      <div class="hero-badge"><span class="badge-dot"></span>Private beta &middot; Built by ChaosCrafted</div>
+      <div class="hero-badge"><span class="badge-dot"></span><strong
+          style="letter-spacing:.18em">NARADA</strong>&nbsp;&mdash;&nbsp;by ChaosCrafted</div>
       <h1 class="hero-h1">
         <span style="display:block">Every tool.</span>
         <span class="grad">One AI.</span>
@@ -4055,35 +4746,91 @@
       <div class="story-time" id="story-time">9:00 AM</div>
       <div class="story-dots" id="story-dots"></div>
 
+      <!-- ss0: cinematic opener — pure problem, no solution yet -->
       <div class="story-step" id="ss0">
         <div class="step-tag">Monday Morning &bull; Engineering Manager</div>
-        <h2 class="step-big">You open Jira.</h2>
+        <h2 class="step-big">You open Jira.<br><span style="opacity:.3">Then Slack.<br>Then GitHub.<br>Then Zoho.</span>
+        </h2>
       </div>
+
+      <!-- ss1: pure problem -->
       <div class="story-step" id="ss1">
         <div class="step-tag">Context Switch #1</div>
         <h2 class="step-big">Slack:<br>47 unread messages.</h2>
       </div>
+
+      <!-- ss2: pure problem -->
       <div class="story-step" id="ss2">
         <div class="step-tag">Context Switch #2</div>
         <h2 class="step-big">GitHub:<br>2 PRs waiting 3 days.</h2>
       </div>
+
+      <!-- ss3: pure problem -->
       <div class="story-step" id="ss3">
         <div class="step-tag">Context Switch #3</div>
         <h2 class="step-big">Zoho: leave request<br>since Tuesday.<br><span style="color:rgba(255,55,95,.85)">You
             forgot.</span></h2>
       </div>
+
+      <!-- ss4: pure problem -->
       <div class="story-step" id="ss4">
         <div class="step-tag">The Reality</div>
-        <h2 class="step-big">Sprint ends Friday.<br>You've shipped nothing.</h2>
+        <h2 class="step-big">Sprint ends Friday.<br>3 tickets blocked.</h2>
       </div>
+
+      <!-- ss5: the cost — stark stat, no solution (contrast) -->
       <div class="story-step" id="ss5">
-        <div class="step-tag">Every Single Day</div>
+        <div class="step-tag">Without Narada &bull; Every Single Day</div>
         <h2 class="step-big" style="font-size:clamp(3rem,9vw,7rem)">4.5 hours.<br><span
-            style="opacity:.35">Wasted.</span></h2>
+            style="opacity:.3">Wasted.</span></h2>
       </div>
+
+      <!-- ss6: the pivot -->
       <div class="story-step" id="ss6">
         <div class="step-tag" style="color:rgba(50,173,230,.45)">Narada</div>
         <h2 class="step-big" style="color:var(--cyan)">What if one conversation<br>replaced all of that?</h2>
+      </div>
+
+      <!-- ss7: payoff — everything Narada handled, all at once -->
+      <div class="story-step" id="ss7">
+        <div class="step-tag" style="color:rgba(50,173,230,.55)">Narada &bull; 9:01 AM &bull; One conversation</div>
+        <h2 class="step-big" style="color:var(--cyan);margin-bottom:0">It already did.</h2>
+        <div class="step-payoff">
+          <div class="sp-log">
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span class="step-sol-src">Slack</span><span>3
+                flagged &bull; 44 filed &bull; Rahul&rsquo;s blocker ticketed</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span class="step-sol-src">GitHub</span><span>PR
+                #84 → Vikram &bull; PR #87 → Priya Sharma</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span
+                class="step-sol-src">Calendar</span><span>Priya confirmed free Wed–Thu</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span
+                class="step-sol-src">Zoho</span><span>Arjun&rsquo;s leave approved. Both notified.</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span class="step-sol-src">Jira</span><span>3
+                blockers traced to Infra. Owners tagged.</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span
+                class="step-sol-src">PagerDuty</span><span>Incident #204 escalation flagged for 9 AM</span></div>
+            <div class="step-sol-row"><span class="step-sol-ck">✓</span><span
+                class="step-sol-src">Narada</span><span>Standup agenda drafted. Ready when you are.</span></div>
+          </div>
+          <div class="sp-stat-row">
+            <div class="sp-stat">
+              <div class="sp-stat-n">7</div>
+              <div class="sp-stat-l">tools touched</div>
+            </div>
+            <div class="sp-stat">
+              <div class="sp-stat-n">88s</div>
+              <div class="sp-stat-l">total time</div>
+            </div>
+            <div class="sp-stat">
+              <div class="sp-stat-n">4.5h</div>
+              <div class="sp-stat-l">saved daily</div>
+            </div>
+            <div class="sp-stat">
+              <div class="sp-stat-n">0</div>
+              <div class="sp-stat-l">tabs opened</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4241,6 +4988,46 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- WHY NARADA? -->
+  <section class="sec wn-sec" id="why-narada" style="background:#05030f">
+    <div class="wn-bg"></div>
+    <div class="sec-inner wn-inner">
+
+      <div class="rev">
+        <div class="sec-tag" style="color:rgba(255,255,255,.28);margin-bottom:1rem">Why Narada?</div>
+        <div class="wn-origin">
+          <span class="wn-origin-lang">Sanskrit &nbsp;·&nbsp; नारद</span>
+          <span class="wn-origin-text">nāra — knowledge &nbsp;+&nbsp; da — giver</span>
+        </div>
+
+        <h2 class="wn-quote rev" style="transition-delay:.08s">
+          The sage who moved between worlds.<br>
+          <em>Who knew everything. Everywhere. Always.</em>
+        </h2>
+
+        <p class="wn-body rev" style="transition-delay:.16s">
+          In Hindu mythology, Narada Muni was the <strong>divine messenger</strong> — the only being who could walk
+          freely through every realm: the courts of gods, the halls of kings, the homes of ordinary people. He carried
+          no agenda. He just <strong>connected what needed connecting</strong> and surfaced what needed surfacing.
+        </p>
+        <p class="wn-body rev" style="transition-delay:.22s;margin-bottom:2rem">
+          That&rsquo;s exactly what your AI assistant should do. Not a chatbot you open in a tab. A presence that
+          <strong>watches every tool, reads every signal, and acts before you have to ask</strong> — then steps back and
+          lets you lead.
+        </p>
+
+        <div class="wn-traits rev" style="transition-delay:.3s">
+          <div class="wn-trait"><span class="wn-trait-dot"></span>Omniscient across tools</div>
+          <div class="wn-trait"><span class="wn-trait-dot"></span>Moves between all worlds</div>
+          <div class="wn-trait"><span class="wn-trait-dot"></span>Carries no agenda</div>
+          <div class="wn-trait"><span class="wn-trait-dot"></span>Always in service</div>
+          <div class="wn-trait"><span class="wn-trait-dot"></span>Named with intention</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -4520,44 +5307,50 @@
       </div>
       <div class="model-grid">
         <div class="model-card rev" style="transition-delay:.04s">
+          <div class="mc-glow" style="background:linear-gradient(135deg,#f97316,#7c3aed)"></div>
+          <div class="mi"><img src="https://www.google.com/s2/favicons?domain=sarvam.ai&sz=128" alt="Sarvam"></div>
+          <div class="mn">Sarvam</div>
+          <div class="md">Indic languages</div>
+        </div>
+        <div class="model-card rev" style="transition-delay:.08s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#32ade6,#0070f3)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=128" alt="Claude"></div>
           <div class="mn">Claude</div>
           <div class="md">Best reasoning</div>
         </div>
-        <div class="model-card rev" style="transition-delay:.08s">
+        <div class="model-card rev" style="transition-delay:.12s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#30d158,#3b82f6)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" alt="GPT-4o"></div>
           <div class="mn">GPT-4o</div>
           <div class="md">Fastest</div>
         </div>
-        <div class="model-card rev" style="transition-delay:.12s">
+        <div class="model-card rev" style="transition-delay:.16s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#4285f4,#ea4335)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128" alt="Gemini">
           </div>
           <div class="mn">Gemini</div>
           <div class="md">Multimodal</div>
         </div>
-        <div class="model-card rev" style="transition-delay:.16s">
+        <div class="model-card rev" style="transition-delay:.2s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#ff375f,#bf5af2)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=128" alt="Mistral"></div>
           <div class="mn">Mistral</div>
           <div class="md">Efficient</div>
         </div>
-        <div class="model-card rev" style="transition-delay:.2s">
+        <div class="model-card rev" style="transition-delay:.24s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#ff9f0a,#ff375f)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=grok.com&sz=128" alt="Grok"></div>
           <div class="mn">Grok</div>
           <div class="md">Real-time</div>
         </div>
-        <div class="model-card rev" style="transition-delay:.24s">
+        <div class="model-card rev" style="transition-delay:.28s">
           <div class="mc-glow" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"></div>
           <div class="mi"><img src="https://www.google.com/s2/favicons?domain=meta.ai&sz=128" alt="Llama"></div>
           <div class="mn">Llama</div>
           <div class="md">Open source</div>
         </div>
       </div>
-      <div class="byok rev" style="transition-delay:.28s">
+      <div class="byok rev" style="transition-delay:.32s">
         <h3>&#128273; Bring Your Own API Key (BYOK)</h3>
         <p>Connect your existing Anthropic, OpenAI, or Google subscription. Keys are AES-256 encrypted, never logged,
           never sent to third parties. Each specialist agent can run a different model.</p>
@@ -4693,8 +5486,17 @@
   </section>
 
   <footer>
-    <p>&copy; 2026 ChaosCrafted &bull; Narada &mdash; the AI that runs your workplace</p>
-    <p style="margin-top:.35rem">Made with obsession in Vijayawada, India &#127470;&#127475;</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:.75rem">
+      <div
+        style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#0071e3,#bf5af2);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:.7rem">
+        N</div>
+      <span style="font-weight:800;font-size:.9rem;color:var(--text)">Narada</span>
+      <span style="opacity:.3">&mdash;</span>
+      <a href="https://chaoscrafted.com" target="_blank" rel="noopener"
+        style="font-size:.8rem;font-weight:600;color:var(--text2);text-decoration:none;opacity:.7;transition:opacity .2s"
+        onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">A ChaosCrafted product</a>
+    </div>
+    <p>&copy; 2026 ChaosCrafted &bull; Made with obsession in Vijayawada, India &#127470;&#127475;</p>
     <p style="margin-top:.35rem;font-size:.7rem;color:rgba(0,0,0,.22)">Integration list represents the planned roadmap.
       Narada is under active development.</p>
   </footer>
@@ -4816,6 +5618,7 @@
       { id: 'ss4', time: '10:28 AM', bg: '#fff0f0' },
       { id: 'ss5', time: '—', bg: '#ffe8e8' },
       { id: 'ss6', time: '—', bg: '#f0f7ff' },
+      { id: 'ss7', time: '9:01 AM', bg: '#e8f8ff' },
     ];
     const NS = STORY.length;
 
@@ -5047,18 +5850,24 @@
     (function () {
       const btn = document.getElementById('theme-toggle');
       if (!btn) return;
+
+      const MOON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      const SUN = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
+
+      const setIcon = isDark => { btn.innerHTML = isDark ? SUN : MOON; };
+
       // Restore saved preference
       const saved = localStorage.getItem('narada-theme');
-      if (saved === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        btn.textContent = '☀️';
-      }
+      const startDark = saved === 'dark';
+      if (startDark) document.documentElement.setAttribute('data-theme', 'dark');
+      setIcon(startDark);
+
       btn.addEventListener('click', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const next = isDark ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('narada-theme', next);
-        btn.textContent = isDark ? '🌙' : '☀️';
+        setIcon(!isDark);
       });
     })();
 
